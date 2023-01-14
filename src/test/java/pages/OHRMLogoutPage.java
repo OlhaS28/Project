@@ -14,8 +14,6 @@ public class OHRMLogoutPage {
     @FindBy(xpath = "//img[@alt=\"profile picture\"]")
     public WebElement getIdPicture;
 
-    @FindBy(xpath = "//ul[@class=\"oxd-dropdown-menu\"]")
-    public WebElement getDropdownMenu;
 
     @FindBy(xpath = "//a[@href=\"/web/index.php/auth/logout\"]")
     public WebElement getLogoutOption;
