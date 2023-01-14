@@ -18,24 +18,21 @@ public class OrangeHRMLoginSteps {
         Driver.getDriver().get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
 
     }
-    @When("User enters correct  <{username}>")
-    public void user_enters_the_correct()
-    {
-        orangeHRMLoginPage.usernameInput.sendKeys("Admin");
+    @When("User enters correct username")
+    public void user_enters_the_correct() {
+        orangeHRMLoginPage.username.sendKeys("Admin");
     }
 
-    @When("User enters correct <{password}>")
+    @When("User enters correct password")
     public void user_enters_correct() {
-
-        orangeHRMLoginPage.passwordInput.sendKeys("admin123");
+        orangeHRMLoginPage.password.sendKeys("admin123");
     }
 
-    @When("User clicks on Submit button")
+    @When("User clicks on login button")
     public void user_clicks_on() {
         orangeHRMLoginPage.getLoginBtn.click();
-
     }
-    @Then("User should be logged in and taken to the Dashboard Tab be able to verify <{string}> is displayed on page")
+    @Then("User should be logged in and taken to the Dashboard Tab be able to verify <tabtext> is displayed on page")
     public void user_should_be_logged_in_and_taken_to_the_dashboard_tab_be_able_to_verify_is_displayed_on_page(String string) {
         orangeHRMLoginPage.getTabText.isDisplayed();
     }
@@ -45,10 +42,13 @@ public class OrangeHRMLoginSteps {
         forgotPassOHRMPage.getForgotPassLink.click();
 
     }
-    @Then("User should see an error message and be able to verify <{string}> is displayed on page")
-    public void user_should_see_an_error_message_and_be_able_to_verify_is_displayed_on_page(String string) {
+    @Then("User should see an error message and be able to verify error message is displayed on page")
+    public void user_should_see_an_error_message_and_be_able_to_verify_error_message_is_displayed_on_page() {
         forgotPassOHRMPage.getResetPassBtn.click();
         Assert.assertEquals(expectedMsg,forgotPassOHRMPage.getResetSuccessMsg);
     }
 
 }
+
+
+
