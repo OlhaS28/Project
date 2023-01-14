@@ -1,53 +1,78 @@
 package steps;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.ForgotPassOHRMPage;
+import pages.OHRMLogoutPage;
 import pages.OrangeHRMLoginPage;
+import utilities.Config;
 import utilities.Driver;
+
+import java.time.Duration;
 
 
 public class OrangeHRMLoginSteps {
-
     OrangeHRMLoginPage orangeHRMLoginPage = new OrangeHRMLoginPage();
-    ForgotPassOHRMPage forgotPassOHRMPage = new ForgotPassOHRMPage();
-    String expectedMsg = "Reset Password link sent successfully";
-    @When("User is on OrangeHRM login page")
+    OHRMLogoutPage ohrmLogoutPage = new OHRMLogoutPage();
+
+    @When("User is on Orange HRM login page")
     public void user_is_on_orange_hrm_login_page() {
-        Driver.getDriver().get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-
+        Driver.getDriver().get(Config.getProperty("url"));
     }
-    @When("User enters correct username")
-    public void user_enters_the_correct() {
-        orangeHRMLoginPage.username.sendKeys("Admin");
+    @When("User enters correct username {string}")
+    public void user_enters_correct_username(String username) {
+        WebDriverWait webDriverWait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+        webDriverWait.until(ExpectedConditions.visibilityOf(orangeHRMLoginPage.username));
+        orangeHRMLoginPage.username.sendKeys(username);
+    }
+    @When("User enters correct password {string}")
+    public void user_enters_correct_password(String password) {
+        orangeHRMLoginPage.password.sendKeys(password);
     }
 
-    @When("User enters correct password")
-    public void user_enters_correct() {
-        orangeHRMLoginPage.password.sendKeys("admin123");
-    }
-
-    @When("User clicks on login button")
-    public void user_clicks_on() {
+    @When("User clicks on login Button")
+    public void user_clicks_on_login_button() {
         orangeHRMLoginPage.getLoginBtn.click();
     }
-    @Then("User should be logged in and taken to the Dashboard Tab be able to verify <tabtext> is displayed on page")
-    public void user_should_be_logged_in_and_taken_to_the_dashboard_tab_be_able_to_verify_is_displayed_on_page(String string) {
-        orangeHRMLoginPage.getTabText.isDisplayed();
+    @Then("User should be taken to the Orange HRM Dashboard Page")
+    public void user_should_be_taken_to_the_orange_hrm_dashboard_page() {
+        WebDriverWait webDriverWait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+        webDriverWait.until(ExpectedConditions.visibilityOf(orangeHRMLoginPage.getDashboardText));
+        Assert.assertTrue(orangeHRMLoginPage.getDashboardText.isDisplayed());
+    }
+    @Then("User should be logged in and taken to the Dashboard Tab and should be able to click on picture icon")
+    public void user_should_be_logged_in_and_taken_to_the_dashboard_tab_and_should_be_able_to_click_on_picture_icon() {
+        ohrmLogoutPage.getIdPicture.click();
     }
 
-    @When("User clicks on <{string}>")
-    public void user_clicks_on(String string) {
-        forgotPassOHRMPage.getForgotPassLink.click();
-
-    }
-    @Then("User should see an error message and be able to verify error message is displayed on page")
-    public void user_should_see_an_error_message_and_be_able_to_verify_error_message_is_displayed_on_page() {
-        forgotPassOHRMPage.getResetPassBtn.click();
-        Assert.assertEquals(expectedMsg,forgotPassOHRMPage.getResetSuccessMsg);
+    @Then("User will then be able to see the dropdown menu and click on the Logout option")
+    public void user_will_then_be_able_to_see_the_dropdown_menu_and_click_on_the_logout_option() {
+        ohrmLogoutPage.getLogoutOption.click();
     }
 
+    @Then("User should taken back to the Login page")
+    public void user_should_taken_back_to_the_login_page() {
+        WebDriverWait webDriverWait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+        webDriverWait.until(ExpectedConditions.visibilityOf(orangeHRMLoginPage.getGetLoginText));
+        Assert.assertTrue(orangeHRMLoginPage.getGetLoginText.isDisplayed());
+    }
+
+
+    @When("Admin user enters username and password")
+    public void adminUserEntersUsernameAndPassword() {
+        WebDriverWait webDriverWait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+        webDriverWait.until(ExpectedConditions.visibilityOf(orangeHRMLoginPage.username));
+        orangeHRMLoginPage.username.sendKeys(Config.getProperty("username"));
+        orangeHRMLoginPage.password.sendKeys(Config.getProperty("pass"));
+
+    }
 }
 
 

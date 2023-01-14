@@ -25,8 +25,10 @@ public class OrangeHRMLoginPage {
     @FindBy(xpath = "//p[@class=\"oxd-text oxd-text--p oxd-alert-content-text\"]")
     public WebElement getErrorMsg;
 
-    @FindBy(xpath = "//h6")
-    public WebElement getTabText;
+    @FindBy(xpath = "//h6[.=\"Dashboard\"]")
+    public WebElement getDashboardText;
 
+    @FindBy(xpath = "//h5[.=\"Login\"]")
+    public WebElement getGetLoginText;
 
 }
