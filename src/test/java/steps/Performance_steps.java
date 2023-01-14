@@ -1,5 +1,6 @@
 package steps;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import pages.PerformanceTabPage;
@@ -75,6 +76,12 @@ performanceTabPage.getEmployeeNameInput.sendKeys("Alex Bologna");
     }
     @Then("User verifies if the records were found")
     public void user_verifies_if_the_records_were_found() {
+
+    }
+
+    @And("User opens Tab {string}")
+    public void userOpensTab(String tab) {
+       performanceTabPage.getTabByText(tab).click();
 
     }
 }
