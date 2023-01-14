@@ -14,10 +14,10 @@ public class OrangeHRMLoginPage {
     }
 
     @FindBy(xpath = "//input[@name=\"username\"]")
-    public WebElement usernameInput;
+    public WebElement username;
 
     @FindBy (xpath = "//input[@name=\"password\"]")
-    public WebElement passwordInput;
+    public WebElement password;
 
     @FindBy(xpath = "//button[@type=\"submit\"]")
     public WebElement getLoginBtn;
