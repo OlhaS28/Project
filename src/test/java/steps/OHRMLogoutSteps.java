@@ -46,6 +46,7 @@ public class OHRMLogoutSteps {
     }
     @Then("User should taken back to the Login page")
     public void user_should_taken_back_to_the_Login_page(){
+
         Driver.getDriver().get(Config.getProperty("url"));
     }
 }
