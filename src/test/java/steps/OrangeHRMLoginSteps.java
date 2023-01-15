@@ -49,6 +49,14 @@ public class OrangeHRMLoginSteps {
         webDriverWait.until(ExpectedConditions.visibilityOf(orangeHRMLoginPage.getDashboardText));
         Assert.assertTrue(orangeHRMLoginPage.getDashboardText.isDisplayed());
     }
+
+    //Negative Scenario Variation
+    @Then("User should see an error message and be able to verify error message is displayed on page")
+    public void user_should_see_an_error_message_and_be_able_to_verify_error_message_is_displayed_on_page() {
+        WebDriverWait webDriverWait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+        webDriverWait.until(ExpectedConditions.visibilityOf(orangeHRMLoginPage.getErrorMsg));
+        Assert.assertTrue(orangeHRMLoginPage.getErrorMsg.isDisplayed());
+    }
     @Then("User should be logged in and taken to the Dashboard Tab and should be able to click on picture icon")
     public void user_should_be_logged_in_and_taken_to_the_dashboard_tab_and_should_be_able_to_click_on_picture_icon() {
         ohrmLogoutPage.getIdPicture.click();
@@ -65,7 +73,7 @@ public class OrangeHRMLoginSteps {
         webDriverWait.until(ExpectedConditions.visibilityOf(orangeHRMLoginPage.getGetLoginText));
         Assert.assertTrue(orangeHRMLoginPage.getGetLoginText.isDisplayed());
     }
-
+    //forgot Password Scenario
 
     @When("Admin user enters username and password")
     public void adminUserEntersUsernameAndPassword() {
@@ -75,7 +83,7 @@ public class OrangeHRMLoginSteps {
         orangeHRMLoginPage.password.sendKeys(Config.getProperty("pass"));
     }
 
-    //Forgot Password Scenario
+
     @Given("User clicks on forgot your password link")
     public void user_clicks_on_forgot_your_password_link() {
         Driver.getDriver().get(Config.getProperty("url"));
