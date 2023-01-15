@@ -1,6 +1,7 @@
 package steps;
 
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -20,6 +21,7 @@ import java.time.Duration;
 
 public class OrangeHRMLoginSteps {
     OrangeHRMLoginPage orangeHRMLoginPage = new OrangeHRMLoginPage();
+    ForgotPassOHRMPage forgotPassOHRMPage = new ForgotPassOHRMPage();
     OHRMLogoutPage ohrmLogoutPage = new OHRMLogoutPage();
 
     @When("User is on Orange HRM login page")
@@ -71,6 +73,31 @@ public class OrangeHRMLoginSteps {
         webDriverWait.until(ExpectedConditions.visibilityOf(orangeHRMLoginPage.username));
         orangeHRMLoginPage.username.sendKeys(Config.getProperty("username"));
         orangeHRMLoginPage.password.sendKeys(Config.getProperty("pass"));
+    }
+
+    //Forgot Password Scenario
+    @Given("User clicks on forgot your password link")
+    public void user_clicks_on_forgot_your_password_link() {
+        Driver.getDriver().get(Config.getProperty("url"));
+        WebDriverWait webDriverWait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+        webDriverWait.until(ExpectedConditions.visibilityOf(forgotPassOHRMPage.getForgotPassLink));
+     forgotPassOHRMPage.getForgotPassLink.click();
+    }
+    @Then("User should be taken to the password reset page and enters correct username {string}")
+    public void user_should_be_taken_to_the_password_reset_page_and_enters_correct_username(String username) {
+        WebDriverWait webDriverWait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+        webDriverWait.until(ExpectedConditions.visibilityOf(forgotPassOHRMPage.usernameInput));
+        forgotPassOHRMPage.usernameInput.sendKeys(username);
+    }
+    @Then("User clicks on Reset password button")
+    public void user_clicks_on_reset_password_button() {
+        forgotPassOHRMPage.getResetPassBtn.click();
+    }
+    @Then("User should see a Reset Password link sent successfully confirmation message")
+    public void user_should_see_a_reset_password_link_sent_successfully_confirmation_message() {
+        WebDriverWait webDriverWait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+        webDriverWait.until(ExpectedConditions.visibilityOf(forgotPassOHRMPage.getResetSuccessMsg));
+        Assert.assertTrue(forgotPassOHRMPage.getResetSuccessMsg.isDisplayed());
 
     }
 }
