@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         plugin = {"html:target/cucumber-report.html"},
         features = "src/test/resources/features",
         glue = "steps",
-        tags = "@OHRMLoginFeatureOutline",
+        tags = "@TEX-133",
         dryRun = false
 )
 public class CukesRunner {
