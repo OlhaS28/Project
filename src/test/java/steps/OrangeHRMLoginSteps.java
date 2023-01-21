@@ -28,12 +28,14 @@ public class OrangeHRMLoginSteps {
     public void user_is_on_orange_hrm_login_page() {
         Driver.getDriver().get(Config.getProperty("url"));
     }
+
     @When("User enters correct username {string}")
     public void user_enters_correct_username(String username) {
         WebDriverWait webDriverWait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
         webDriverWait.until(ExpectedConditions.visibilityOf(orangeHRMLoginPage.username));
         orangeHRMLoginPage.username.sendKeys(username);
     }
+
     @When("User enters correct password {string}")
     public void user_enters_correct_password(String password) {
         orangeHRMLoginPage.password.sendKeys(password);
@@ -43,6 +45,7 @@ public class OrangeHRMLoginSteps {
     public void user_clicks_on_login_button() {
         orangeHRMLoginPage.getLoginBtn.click();
     }
+
     @Then("User should be taken to the Orange HRM Dashboard Page")
     public void user_should_be_taken_to_the_orange_hrm_dashboard_page() {
         WebDriverWait webDriverWait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
@@ -57,6 +60,7 @@ public class OrangeHRMLoginSteps {
         webDriverWait.until(ExpectedConditions.visibilityOf(orangeHRMLoginPage.getErrorMsg));
         Assert.assertTrue(orangeHRMLoginPage.getErrorMsg.isDisplayed());
     }
+
     @Then("User should be logged in and taken to the Dashboard Tab and should be able to click on picture icon")
     public void user_should_be_logged_in_and_taken_to_the_dashboard_tab_and_should_be_able_to_click_on_picture_icon() {
         ohrmLogoutPage.getIdPicture.click();
@@ -89,18 +93,21 @@ public class OrangeHRMLoginSteps {
         Driver.getDriver().get(Config.getProperty("url"));
         WebDriverWait webDriverWait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
         webDriverWait.until(ExpectedConditions.visibilityOf(forgotPassOHRMPage.getForgotPassLink));
-     forgotPassOHRMPage.getForgotPassLink.click();
+        forgotPassOHRMPage.getForgotPassLink.click();
     }
+
     @Then("User should be taken to the password reset page and enters correct username {string}")
     public void user_should_be_taken_to_the_password_reset_page_and_enters_correct_username(String username) {
         WebDriverWait webDriverWait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
         webDriverWait.until(ExpectedConditions.visibilityOf(forgotPassOHRMPage.usernameInput));
         forgotPassOHRMPage.usernameInput.sendKeys(username);
     }
+
     @Then("User clicks on Reset password button")
     public void user_clicks_on_reset_password_button() {
         forgotPassOHRMPage.getResetPassBtn.click();
     }
+
     @Then("User should see a Reset Password link sent successfully confirmation message")
     public void user_should_see_a_reset_password_link_sent_successfully_confirmation_message() {
         WebDriverWait webDriverWait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
@@ -109,6 +116,3 @@ public class OrangeHRMLoginSteps {
 
     }
 }
-
-
-
